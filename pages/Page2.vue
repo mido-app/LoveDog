@@ -1,5 +1,5 @@
 <template>
   <view>
-    <text>Page2</text>
+    <text>Complete!</text>
   </view>
 </template>

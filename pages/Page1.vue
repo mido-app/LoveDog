@@ -1,16 +1,13 @@
 <template>
   <view>
     <text>Page1</text>
-    <button title="Navigate" @press="onTap" />
+    <text-input class="input" v-model="name" />
+    <nb-button @press="onTap"><nb-text>Navigate</nb-text></nb-button>
   </view>
 </template>
 
 <script>
-// import firebase from 'firebase/app'
-// import 'firebase/firestore'
-// import config from './firebase.config'
-// firebase.initializeApp(config)
-// const firestore = firebase.firestore()
+import { firestore } from '../firebase'
 
 export default { 
   props: {
@@ -18,10 +15,24 @@ export default {
       type: Object
     }
   },
+  data: function () {
+    return {
+      name: ''
+    }
+  },
   methods: {
-    onTap() {
+    async onTap() {
+      await firestore.collection('test').doc('TESTUSER').set({
+        name: this.name
+      })
       this.navigation.navigate('Page2')
     }
   }
 }
 </script>
+
+<style scoped>
+.input {
+  background-color: bisque;
+}
+</style>
