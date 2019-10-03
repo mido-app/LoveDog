@@ -1,7 +1,7 @@
 <template>
   <view>
-    <text>Page1</text>
-    <button title="Navigate" @press="onTap" />
+    <text>Login</text>
+    <button title="Login" @press="login" />
   </view>
 </template>
 
@@ -19,8 +19,8 @@ export default {
     }
   },
   methods: {
-    onTap() {
-      this.navigation.navigate('Page2')
+    login() {
+      this.navigation.navigate('MyPage')
     }
   }
 }
