@@ -1,8 +1,7 @@
 <template>
   <view>
-    <text>Page1</text>
-    <text-input class="input" v-model="name" />
-    <nb-button @press="onTap"><nb-text>Navigate</nb-text></nb-button>
+    <text>Login</text>
+    <button title="Login" @press="login" />
   </view>
 </template>
 
@@ -21,11 +20,8 @@ export default {
     }
   },
   methods: {
-    async onTap() {
-      await firestore.collection('test').doc('TESTUSER').set({
-        name: this.name
-      })
-      this.navigation.navigate('Page2')
+    login() {
+      this.navigation.navigate('MyPage')
     }
   }
 }
