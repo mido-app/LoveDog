@@ -26,10 +26,17 @@
   </view>
 </template>
 <script>
+import { firebase, auth } from '../firebase'
+
 export default {
   props: {
     navigation: {
       type: Object
+    }
+  },
+  mounted () {
+    if(!firebase.auth().currentUser) {
+      this.navigation.navigate('Login')
     }
   },
   data: function() {
@@ -39,8 +46,14 @@ export default {
   },
   methods: {
     onPressUpload: function() {
-        //user.icon=;
-        alert("アイコンを更新しました。");
+        alert('Hello')
+    },
+    onPressUpdate: function() {
+        alert('Hello')
+    },
+    async onPressLogout() {
+      await auth.signOut()        
+      this.navigation.navigate('Login')
     },
     onPressUpdate: function() {  
       //user.name=text;
