@@ -1,6 +1,7 @@
 <template>
   <view>
     <view class="timeline">
+      <Action v-for="act in actions" :key="act.postId"></Action>
     </view>
     <view class="action">
     <button
@@ -28,13 +29,41 @@
 </template>
 
 <script>
+import Action from "../components/Action";
 import ImagePicker from "../components/ImagePicker";
 export default {
-    components: { ImagePicker },
+    components: { Action, ImagePicker },
     data: { 
         walking: true,
         text: '',
         comment: '',
+        function() {
+          return {
+            actions: [
+              {
+                postId: 1,
+                body: "a Sunny Day",
+                icon:
+                  "https://facebook.github.io/react-native/docs/assets/favicon.png",
+                createdAt: "ドキュメントの登録日時"
+              },
+              {
+                postId: 2,
+                body: "a Sunny Day",
+                icon:
+                  "https://facebook.github.io/react-native/docs/assets/favicon.png",
+                createdAt: "ドキュメントの登録日時"
+              },
+              {
+                postId: 3,
+                body: "a Sunny Day",
+                icon:
+                  "https://facebook.github.io/react-native/docs/assets/favicon.png",
+                createdAt: "ドキュメントの登録日時"
+              },
+            ]
+          };
+        }
     },
     methods: {
       onPressWalking: function() {

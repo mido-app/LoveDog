@@ -21,9 +21,13 @@ export default {
           this.result = await ImagePicker.launchCameraAsync();
           console.log(this.result)
           // this.imageuri = this.result.uri
-          this.$emit('load', this.result.uri)
+          
         } catch (err) {
           console.error(err)
+        }
+
+        if(!this.result.cancelled) {
+          this.$emit('load', this.result.uri)
         }
       }
  }
