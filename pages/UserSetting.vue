@@ -1,55 +1,56 @@
 <template>
-    <view>
-        <image
-          :style="{width: 50, height: 50}"
-          :source="{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}"
-        />
-        <button class="upload"
-          :on-press="onPressUpload"
-          title="アップロード"
-          color="#841584"
-          accessibility-label="Upload"
-        />
-        <text>ユーザ名</text>
-        <text-input
-          :style="{height: 40, width: 100, borderColor: 'gray', borderWidth: 1}"
-          v-model="text"
-        />
-      <button
-          :on-press="onPressUpdate"
-          title="更新"
-          color="#000000"
-          accessibility-label="Update"
-        />
-      <button
-          :on-press="onPressLogout"
-          title="ログアウト"
-          color="#841584"
-          accessibility-label="Logout"
-        />
-    </view>
-
+  <view>
+    <image
+      :style="{width: 70, height: 70}"
+      :source="{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}"
+    /><!--user.icon-->
+    <button
+      class="upload"
+      :on-press="onPressUpload"
+      title="アップロード"
+      color="#841584"
+      accessibility-label="Upload"
+    />
+    <text>ユーザ名</text>
+    <text-input
+      :style="{height: 40, width: 100, borderColor: 'gray', borderWidth: 1}"
+      v-model="text"
+    />
+    <button :on-press="onPressUpdate" title="更新" color="#841584" accessibility-label="Update" />
+    <button
+      @press="() => navigate('Login')"
+      title="ログアウト"
+      color="#841584"
+      accessibility-label="Logout"
+    />
+  </view>
 </template>
 <script>
 export default {
-  data: function() {
-    return {
-        text: '犬　好男'
+  props: {
+    navigation: {
+      type: Object
     }
   },
+  data: function() {
+    return {
+      text: "犬　好男"
+    };
+  },
   methods: {
-      onPressUpload: function() {
-          alert('Hello')
-      },
-      onPressUpdate: function() {
-          alert('Hello')
-      },
-      onPressLogout: function() {
-          alert('Hello')
-      },
+    onPressUpload: function() {
+        //user.icon=;
+        alert("アイコンを更新しました。");
     },
-  
-}
+    onPressUpdate: function() {  
+      //user.name=text;
+      alert("ユーザ名を変更しました。");
+    },
+    navigate(pageName) {
+      this.navigation.navigate(pageName);
+    }
+  }
+};
 </script>
 <style>
 .container {
