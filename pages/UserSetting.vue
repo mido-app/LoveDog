@@ -31,7 +31,19 @@
 
 </template>
 <script>
+import { firebase, auth } from '../firebase'
+
 export default {
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  mounted () {
+    if(!firebase.auth().currentUser) {
+      this.navigation.navigate('Login')
+    }
+  },
   data: function() {
     return {
         text: '犬　好男'
@@ -44,8 +56,9 @@ export default {
       onPressUpdate: function() {
           alert('Hello')
       },
-      onPressLogout: function() {
-          alert('Hello')
+      async onPressLogout() {
+        await auth.signOut()        
+        this.navigation.navigate('Login')
       },
     },
   

@@ -11,10 +11,21 @@
 </template>
 
 <script>
+import { firebase } from '../firebase'
 import TweetSlice from "./TweetSlice";
 
 export default {
   components: { TweetSlice },
+  props: {
+    navigation: {
+      type: Object
+    }
+  },
+  mounted () {
+    if(!firebase.auth().currentUser) {
+      this.navigation.navigate('Login')
+    }
+  },
   data: function() {
     return {
       globalPost: [

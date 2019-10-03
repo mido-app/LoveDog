@@ -28,9 +28,20 @@
 </template>
 
 <script>
+import { firebase } from '../firebase'
 import ImagePicker from "../components/ImagePicker";
 export default {
     components: { ImagePicker },
+    props: {
+      navigation: {
+        type: Object
+      }
+    },
+    mounted () {
+      if(!firebase.auth().currentUser) {
+        this.navigation.navigate('Login')
+      }
+    },
     data: { 
         walking: true,
         text: '',
