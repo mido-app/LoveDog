@@ -12,7 +12,10 @@
     placeholder="Type here to Password" 
     v-model="Password"/> 
     <text v-if = "LoginCheck" class="text-color-primary">EmailかPassword間違ってるよ( *´艸｀)</text>
-    <button v-bind:title="Login" v-bind:on-press="LoginPress"/>
+    <!-- <button v-bind:title="Login" v-bind:on-press="LoginPress"/> -->
+    <nb-button rounded primary :onPress="LoginPress">
+      <nb-text>Login</nb-text>
+    </nb-button>
 
     <image
      class="inu"
