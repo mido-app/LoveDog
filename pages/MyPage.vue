@@ -22,7 +22,7 @@
       color="#993099"
       accessibility-label="Learn more about this purple button"
     />
-    <image-picker />
+    <image-picker @load="onLoadPhoto" />
     </view>
   </view>
 </template>
@@ -42,6 +42,9 @@ export default {
       },
       onPressSend: function() {
         alert(this.comment)
+    },
+    onLoadPhoto(uri) {
+      console.log(uri)
     }
   }
 }
