@@ -1,7 +1,9 @@
 <template>
   <view>
     <text>Login</text>
-    <button title="Login" @press="login" />
+    <nb-button rounded primary :onPress="login">
+      <nb-text>Login</nb-text>
+    </nb-button>
   </view>
 </template>
 
