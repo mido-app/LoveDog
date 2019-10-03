@@ -30,22 +30,22 @@
 <script>
 import ImagePicker from "../components/ImagePicker";
 export default {
-        components: { ImagePicker },
-        data: { 
-            walking: true,
-            text: '',
-            comment: '',
-        },
-        methods: {
-          onPressWalking: function() {
-            this.walking = !this.walking
-          },
-          onPressSend: function() {
-            alert(this.comment)
-        }
-      }
+    components: { ImagePicker },
+    data: { 
+        walking: true,
+        text: '',
+        comment: '',
+    },
+    methods: {
+      onPressWalking: function() {
+        this.walking = !this.walking
+      },
+      onPressSend: function() {
+        alert(this.comment)
     }
-    </script>
+  }
+}
+</script>
 
 <style>
 .container {

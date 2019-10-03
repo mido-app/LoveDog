@@ -5,9 +5,11 @@
 <script>
 import { createAppContainer, createStackNavigator } from "vue-native-router"
 
+import Home from './pages/Home'
 import Login from './pages/Login'
 import MyPage from './pages/MyPage'
 import WorldActivity from './pages/WorldActivity'
+import UserSetting from './pages/UserSetting'
 
 import Vue from "vue-native-core";
 import { VueNativeBase } from "native-base";
@@ -15,12 +17,14 @@ Vue.use(VueNativeBase);
 
 const StackNavigator = createStackNavigator(
   {
+    Home: Home,
     Login: Login,
     MyPage: MyPage,
     WorldActivity: WorldActivity,
+    UserSetting: UserSetting,
   },
   {
-    initialRouteName: 'Login'
+    initialRouteName: 'Home'
   }
 )
 

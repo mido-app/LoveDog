@@ -1,12 +1,58 @@
 <template>
   <view>
-    <text>WorldActivity</text>
-    <button title="MyPage" @press="onMyPage" />
+    <view>
+      <text>WorldActivity</text>
+      <button title="MyPage" @press="onMyPage" />
+    </view>
+    <view class="container">
+      <TweetSlice v-for="post in globalPost" :key="post.postId" :post="post" />
+    </view>
   </view>
 </template>
 
 <script>
-export default { 
+import TweetSlice from "./TweetSlice";
+
+export default {
+  components: { TweetSlice },
+  data: function() {
+    return {
+      globalPost: [
+        {
+          postId: 1,
+          userName: "ぽち",
+          icon:
+            "https://facebook.github.io/react-native/docs/assets/favicon.png",
+          body: "本文",
+          createdAt: "ドキュメントの登録日時"
+        },
+        {
+          postId: 2,
+          userName: "ぽち",
+          icon:
+            "https://facebook.github.io/react-native/docs/assets/favicon.png",
+          body: "本文",
+          createdAt: "ドキュメントの登録日時"
+        },
+        {
+          postId: 3,
+          userName: "ぽち",
+          icon:
+            "https://facebook.github.io/react-native/docs/assets/favicon.png",
+          body: "本文",
+          createdAt: "ドキュメントの登録日時"
+        },
+        {
+          postId: 4,
+          userName: "ぽち",
+          icon:
+            "https://facebook.github.io/react-native/docs/assets/favicon.png",
+          body: "本文",
+          createdAt: "ドキュメントの登録日時"
+        }
+      ]
+    };
+  },
   props: {
     navigation: {
       type: Object
@@ -14,8 +60,8 @@ export default {
   },
   methods: {
     onMyPage() {
-      this.navigation.navigate('MyPage')
+      this.navigation.navigate("MyPage");
     }
   }
-}
+};
 </script>
