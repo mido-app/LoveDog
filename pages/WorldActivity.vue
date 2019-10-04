@@ -47,18 +47,26 @@ export default {
     // ユーザを取得
     let userIdList = globalPost.map(post => post.userId).filter((x, i, self) => self.indexOf(x) === i)
     console.log(userIdList)
+
     let userDocList = await Promise.all(
       userIdList.map(uid => firestore.collection('user').doc(uid).get())
     )
 
-    await Promise.all(
-      globalPost.map(async post => {
-        const userDoc = userDocList.filter(doc => doc.id === post.userId)[0]
-        const user = userDoc.data()      
-        post.icon = await storage.ref(user.iconPath).getDownloadURL()      
-        post.userName = user.name
+    let userList = await Promise.all(
+      userDocList.map(async doc => {
+        let user = doc.data()
+        user.id = doc.id
+        user.iconUrl = await storage.ref(user.iconPath).getDownloadURL()  
+        return user
       })
     )
+    console.log(userList)
+
+    globalPost.forEach(post => {
+      const user = userList.filter(u => u.id === post.userId)[0]
+      post.userName = user.name
+      post.icon = user.iconUrl
+    })
 
     console.log(globalPost)
     this.globalPost = globalPost
