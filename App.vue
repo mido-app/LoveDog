@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import MyPage from './pages/MyPage'
 import WorldActivity from './pages/WorldActivity'
 import UserSetting from './pages/UserSetting'
+import Message from './pages/Message'
 
 import Vue from "vue-native-core";
 import { VueNativeBase } from "native-base";
@@ -22,9 +23,10 @@ const StackNavigator = createStackNavigator(
     MyPage: MyPage,
     WorldActivity: WorldActivity,
     UserSetting: UserSetting,
+    Message: Message,
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Login'
   }
 )
 
