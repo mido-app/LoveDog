@@ -1,7 +1,7 @@
 <template>
   <view>
     <view class="timeline">
-      <Action v-for="act in actions" :key="act.postId"></Action>
+      <Action v-for="act in actions" :key="act.postId" :act="act"></Action>
     </view>
     <view class="action">
     <button
@@ -33,38 +33,39 @@ import Action from "../components/Action";
 import ImagePicker from "../components/ImagePicker";
 export default {
     components: { Action, ImagePicker },
-    data: { 
+    props: { 
         walking: true,
         text: '',
         comment: '',
-        function() {
+        photoUri: ''
+    },
+    data: function() {
           return {
             actions: [
               {
                 postId: 1,
                 body: "a Sunny Day",
-                icon:
-                  "https://facebook.github.io/react-native/docs/assets/favicon.png",
+                icon: "",
+                likeCount: 5,
                 createdAt: "ドキュメントの登録日時"
               },
               {
                 postId: 2,
                 body: "a Sunny Day",
-                icon:
-                  "https://facebook.github.io/react-native/docs/assets/favicon.png",
+                icon: "",
+                likeCount: 10,
                 createdAt: "ドキュメントの登録日時"
               },
               {
                 postId: 3,
                 body: "a Sunny Day",
-                icon:
-                  "https://facebook.github.io/react-native/docs/assets/favicon.png",
+                icon: "",
+                likeCount: 100,
                 createdAt: "ドキュメントの登録日時"
               },
             ]
           };
-        }
-    },
+        },
     methods: {
       onPressWalking: function() {
         this.walking = !this.walking
@@ -74,6 +75,7 @@ export default {
     },
     onLoadPhoto(uri) {
       console.log(uri)
+      this.photoUri = uri
     }
   }
 }

@@ -13,15 +13,12 @@ import * as ImagePicker from 'expo-image-picker';
 export default {
     props: {
       result: null,
-      // imageuri: null
     },
     methods: {
       async pickImage() {
         try {
           this.result = await ImagePicker.launchCameraAsync();
-          console.log(this.result)
-          // this.imageuri = this.result.uri
-          
+          console.log(this.result)          
         } catch (err) {
           console.error(err)
         }

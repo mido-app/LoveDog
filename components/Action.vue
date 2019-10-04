@@ -1,8 +1,11 @@
 <template>
   <view>
     <view>
-      <text>{{ post.body & " " & post.createdAt}}</text>
-      <image :style="{width: 50, height: 50}" :source="{uri: post.icon}" />
+      <!-- <text>{{ act.body & " " & act.createdAt & " ♡" & act.likeCount}}</text> -->
+      <text>{{ act.createdAt }} {{ act.body }}</text>
+      <text>{{ act.body }}</text>
+      <text>♡{{ act.likeCount }}</text>
+      <image :style="{width: 50, height: 50}" :source="{uri: act.icon}" />
     </view>
   </view>
 </template>
@@ -10,7 +13,7 @@
 <script>
 export default {
   props: {
-    post: {
+    act: {
       Type: Object
     }
   }
