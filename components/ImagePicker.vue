@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { Permissions } from "expo";
+import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 export default {
     props: {
@@ -16,6 +16,7 @@ export default {
     methods: {
       async pickImage() {
         try {
+          await Permissions.askAsync(Permissions.CAMERA);
           this.result = await ImagePicker.launchCameraAsync();
           console.log(this.result)          
         } catch (err) {
