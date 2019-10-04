@@ -12,7 +12,7 @@
       <view v-if="post.picture != null">
         <image :style="{width: 150, height: 90}" :source="{uri: post.picture}" />
       </view>
-      <nb-button v-on:click="post.counter += 1" :style="{ paddingVertical: 0 }" transparent>
+      <nb-button :on-press="addCount" transparent>
         <nb-icon name="thumbs-up" active></nb-icon>
         <nb-text>{{post.likeCount}} Likes</nb-text>
       </nb-button>
@@ -35,6 +35,11 @@ export default {
   props: {
     post: {
       Type: Object
+    }
+  },
+  methods: {
+    addCount() {
+      this.post.counter += 1
     }
   }
 };
