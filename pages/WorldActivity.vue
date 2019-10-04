@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import Vue from 'vue-native-core';
 import { firebase, firestore, storage } from '../firebase'
 import TweetSlice from "../components/TweetSlice";
 

@@ -1,15 +1,20 @@
 <template>
   <nb-list-item thumbnail>
-    <nb-left>
-      <image :style="{width: 66, height: 58}" :source="{uri: post.icon}" />
+    <nb-left :style="{width: 66}">
+      <view>
+        <image :style="{width: 66, height: 58}" :source="{uri: post.icon}" />
+        <nb-text>@{{post.userId}}</nb-text>
+      </view>
     </nb-left>
     <nb-body>
       <nb-text>{{post.userName}}</nb-text>
-      <nb-text note :numberOfLines="3">{{post.body}}</nb-text>
-      <image :style="{width: 140, height: 58}" :source="{uri: post.picture}" />
+      <nb-text note :style="{width: 150}">{{post.body}}</nb-text>
+      <view v-if="post.picture != null">
+        <image :style="{width: 150, height: 90}" :source="{uri: post.picture}" />
+      </view>
       <nb-button :on-press="addCount" transparent>
         <nb-icon name="thumbs-up" active></nb-icon>
-        <nb-text>{{post.counter}} Likes</nb-text>
+        <nb-text>{{post.likeCount}} Likes</nb-text>
       </nb-button>
     </nb-body>
     <nb-right>
