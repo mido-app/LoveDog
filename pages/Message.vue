@@ -33,6 +33,9 @@
               <nb-icon name="thumbs-up"></nb-icon>
               <nb-text>{{ card.likeCount }}</nb-text>
             </nb-button>
+            <nb-button transparent :onPress="WalkRoutePress">
+              <nb-text>散歩道</nb-text>
+            </nb-button>
           </nb-left>
         </nb-card-item>
       </nb-card>
@@ -47,6 +50,11 @@
   import cardImage from "../assets/5673.gif";
   const deviceWidth = Dimensions.get("window").width;
   export default {
+    props: {
+      navigation: {
+        type: Object
+      }
+    },
     data: function() {
       return {
         logo,
@@ -107,6 +115,11 @@
       ],
 
       };
+    },
+    methods: {
+      WalkRoutePress() {
+        this.navigation.navigate("WalkRoute");
+      }
     }
   };
 </script>
