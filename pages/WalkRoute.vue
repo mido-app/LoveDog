@@ -1,18 +1,21 @@
 <template>
-  <nb-container>
+  <nb-container class="container">
     <nb-header>
       <text>散歩ルート</text>
     </nb-header>
     <nb-grid>
-      <nb-row :style="{ backgroundColor: '#635DB7' }">
-        <map-view class="container" :initial-region="coordinates" :region="location" />
+      <nb-row>
+        <map-view class="map" :initial-region="coordinates">
+        </map-view>
       </nb-row>
-      <nb-row :style="{ backgroundColor: '#635DB7' }">
-        <touchable-opacity :on-press="getLocation" >
-          <text>現在一取得</text>
-        </touchable-opacity>
-      <nb-row :style="{ backgroundColor: '#635DB7' }">
-        <text>あなたの現在位置:{{location.latitude}}</text>
+      <nb-row>
+        <text>私は昨日日の出とともに散歩をしました。ほぼ寝起きの私にとって、小鳥たちのさえずりは睡魔を誘う子守唄のようでした。犬も自分で散歩できるともっとお布団と一緒に入れるのになーと思った今日この頃でした。</text>
+      </nb-row>
+      <nb-row>
+        <nb-button rounded primary :onPress="getLocation">
+          <nb-text>現在位置は？</nb-text>
+        </nb-button>
+        <text>あなたのいる場所:{{ location.coords }}</text>
       </nb-row>
     </nb-grid>
   </nb-container>
@@ -32,12 +35,14 @@ export default {
         longitudeDelta: 0.0421
       },
       location: {},
+      title: "TitleA",
+      description: "Desc",
     };
   },
-  created: async function() {
+  async created() {
     await Location.requestPermissionsAsync();
     this.location = await Location.getCurrentPositionAsync({});
-    console.log("current location=" + JSON.stringify(this.location));
+    console.log("Current location=" + JSON.stringify(this.location));
   },
   methods: {
     getLocation: async function() {
@@ -59,6 +64,10 @@ export default {
 </script>
 <style>
 .container {
+  background-color: white;
+  flex: 1;
+}
+.map {
   flex: 1;
 }
 </style>
