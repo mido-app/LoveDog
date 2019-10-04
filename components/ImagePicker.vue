@@ -1,10 +1,9 @@
 <template>
-  <view>
-    <button
+    <nb-button small light
       :on-press="pickImage"
-      title="Cam"
-    />
-  </view>
+    >
+      <nb-icon name='camera'></nb-icon>
+    </nb-button>
 </template>
 
 <script>
@@ -32,10 +31,4 @@ export default {
 </script>
 
 <style>
-.container {
-  flex: 1;
-}
-.text-color-primary {
-  color: blue;
-}
 </style>
