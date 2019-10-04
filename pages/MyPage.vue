@@ -10,9 +10,8 @@
         </view>
       </scroll-view>
       </nb-row>
-      <nb-row v-if="walking" :style="{height: 35}">
+      <nb-row v-if="!walking" :style="{height: 35}">
         <image
-          v-if="!walking"
           class="inu"
           :style="{width: 35, height: 35}"
           :source="require('../assets/5673.gif')"/>
@@ -79,6 +78,7 @@ export default {
         let post = doc.data()
         post.postId = doc.id
         post.createdAt = data.createdAt.toDate()
+        post.counter = 0
         globalPost.push(post)
       })
       this.globalPost = globalPost
