@@ -1,6 +1,7 @@
 <template>
   <view>
     <view class="timeline">
+      <Action v-for="act in actions" :key="act.postId" :act="act"></Action>
     </view>
     <view class="action">
     <button
@@ -28,10 +29,12 @@
 </template>
 
 <script>
-import { firebase } from '../firebase'
+import Action from "../components/Action";
 import ImagePicker from "../components/ImagePicker";
+import { firebase } from '../firebase'
+
 export default {
-    components: { ImagePicker },
+    components: { Action, ImagePicker },
     props: {
       navigation: {
         type: Object
@@ -42,10 +45,36 @@ export default {
         this.navigation.navigate('Login')
       }
     },
-    data: { 
-        walking: true,
-        text: '',
-        comment: '',
+    data: function() {
+      return {
+          walking: true,
+          text: '',
+          comment: '',
+          photoUri: '',
+          actions: [
+            {
+              postId: 1,
+              body: "a Sunny Day",
+              icon: "",
+              likeCount: 5,
+              createdAt: "ドキュメントの登録日時"
+            },
+            {
+              postId: 2,
+              body: "a Sunny Day",
+              icon: "",
+              likeCount: 10,
+              createdAt: "ドキュメントの登録日時"
+            },
+            {
+              postId: 3,
+              body: "a Sunny Day",
+              icon: "",
+              likeCount: 100,
+              createdAt: "ドキュメントの登録日時"
+            },
+          ]
+        }
     },
     methods: {
       onPressWalking: function() {
@@ -56,6 +85,7 @@ export default {
     },
     onLoadPhoto(uri) {
       console.log(uri)
+      this.photoUri = uri
     }
   }
 }
