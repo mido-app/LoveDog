@@ -11,12 +11,8 @@
 </template>
 
 <script>
-import Vue from "vue-native-core";
 import { firebase } from "../firebase";
-import { VueNativeBase } from "native-base";
 import TweetSlice from "../components/TweetSlice";
-
-Vue.use(VueNativeBase);
 
 export default {
   components: { TweetSlice },
@@ -35,46 +31,51 @@ export default {
       globalPost: [
         {
           postId: 1,
+          userId: 'pochi',
           userName: "ぽち",
           icon:
             "https://facebook.github.io/react-native/docs/assets/favicon.png",
           body: "本文",
-          counter: 0,
+          likeCount: 0,
           picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
           createdAt: "ドキュメントの登録日時"
         },
         {
           postId: 2,
+          userId: 'pochi',
           userName: "太郎",
           icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
           body: "本文",
-          counter: 0,
+          likeCount: 0,
           createdAt: "ドキュメントの登録日時"
         },
         {
           postId: 3,
+          userId: 'pochi',
           userName: "ぽち",
           icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
           body: "本文",
-          counter: 0,
+          likeCount: 0,
           picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
           createdAt: "ドキュメントの登録日時"
         },
         {
           postId: 4,
+          userId: 'pochi',
           userName: "ぽち",
           icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
-          body: "本文",
-          counter: 0,
+          body: "本文本文ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ",
+          likeCount: 0,
           picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
           createdAt: "ドキュメントの登録日時"
         },
         {
           postId: 5,
+          userId: 'samp_user',
           userName: "散歩ユーザー",
           icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
           body: "散歩しました",
-          counter: 0,
+          likeCount: 0,
           childPostList: [
             {
               postId: "5",
