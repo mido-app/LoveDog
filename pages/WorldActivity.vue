@@ -16,10 +16,7 @@
 <script>
 import Vue from 'vue-native-core';
 import { firebase } from '../firebase'
-import { VueNativeBase } from 'native-base';
 import TweetSlice from "../components/TweetSlice";
-
-Vue.use(VueNativeBase);
 
 export default {
   components: { TweetSlice },
