@@ -78,7 +78,6 @@ export default {
         let post = doc.data()
         post.postId = doc.id
         post.createdAt = data.createdAt.toDate()
-        post.counter = 0
         globalPost.push(post)
       })
       this.globalPost = globalPost
