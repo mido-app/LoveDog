@@ -16,7 +16,7 @@
 <script>
 import Vue from 'vue-native-core';
 import { VueNativeBase } from 'native-base';
-import TweetSlice from "./TweetSlice";
+import TweetSlice from "../components/TweetSlice";
 
 Vue.use(VueNativeBase);
 
@@ -36,11 +36,10 @@ export default {
         },
         {
           postId: 2,
-          userName: "ぽち",
+          userName: "太郎",
           icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
           body: "本文",
           counter: 0,
-          picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
           createdAt: "ドキュメントの登録日時"
         },
         {
