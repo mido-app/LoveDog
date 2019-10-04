@@ -24,7 +24,7 @@
         <nb-button transparent :onPress="onPressView">
           <nb-text>View</nb-text>
         </nb-button>
-        <nb-button transparent>
+        <nb-button transparent :onPress="onPressMap">
           <nb-icon name="navigate" active></nb-icon>
         </nb-button>
       </view>
@@ -45,6 +45,9 @@ export default {
   methods: {
     onPressView() {
       this.$emit('view', this.post.postId)
+    },
+    onPressMap() {
+      this.$emit('map', this.post.postId)
     },
     addCount() {
       this.post.likeCount += 1

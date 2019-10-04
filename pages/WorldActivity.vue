@@ -4,7 +4,7 @@
         paddingVertical: 20
     }}">
       <view>
-        <TweetSlice v-for="post in globalPost" :key="post.postId" :post="post" @view="onTapView" />
+        <TweetSlice v-for="post in globalPost" :key="post.postId" :post="post" @view="onTapView" @map="onTapMap" />
       </view>
     </scroll-view>
   </view>
@@ -86,6 +86,10 @@ export default {
     },
     onTapView(postId) {
       this.navigation.navigate("Message");
+    },
+    onTapMap(postId) {
+      console.log('on tap map')
+      this.navigation.navigate("WalkRoute");
     }
   }
 };
