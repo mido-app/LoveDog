@@ -1,13 +1,21 @@
 <template>
-  <view class="container">
-    <map-view class="container" :initial-region="coordinates" :region="location" />
-
-    <touchable-opacity :on-press="getLocation" >
-      <text>Get Current Location</text>
-    </touchable-opacity>
-    <text>Current Location:</text>
-    <text>{{location.latitude}}</text>
-  </view>
+  <nb-container>
+    <nb-header>
+      <text>散歩ルート</text>
+    </nb-header>
+    <nb-grid>
+      <nb-row :style="{ backgroundColor: '#635DB7' }">
+        <map-view class="container" :initial-region="coordinates" :region="location" />
+      </nb-row>
+      <nb-row :style="{ backgroundColor: '#635DB7' }">
+        <touchable-opacity :on-press="getLocation" >
+          <text>現在一取得</text>
+        </touchable-opacity>
+      <nb-row :style="{ backgroundColor: '#635DB7' }">
+        <text>あなたの現在位置:{{location.latitude}}</text>
+      </nb-row>
+    </nb-grid>
+  </nb-container>
 </template>
 
 <script>
