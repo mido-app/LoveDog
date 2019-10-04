@@ -1,8 +1,9 @@
 <template>
   <view>
     <image
+      v-if="iconUrl !== null"
       :style="{width: 70, height: 70}"
-      :source="{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}"
+      :source="{uri: iconUrl}"
     /><!--user.icon-->
     <button
       class="upload"
@@ -53,7 +54,10 @@ export default {
       createdAt: data.createdAt,
       updatedAt: data.updatedAt
     }
-},
+
+    this.iconUrl = await storage.ref(this.user.iconPath).getDownloadURL()
+    console.log(this.iconUrl)
+  },
   data: function() {
     return {
       user: {
@@ -62,7 +66,8 @@ export default {
         iconPath: '',
         createdAt: null,
         updatedAt: null
-      }
+      },
+      iconUrl: null
     };
   },
   methods: {
@@ -118,9 +123,6 @@ export default {
         xhr.open('GET', uri, true);
         xhr.send(null);
       });
-    },
-    onPressUpdate: function() {
-        alert('Hello')
     },
     async onPressLogout() {
       await auth.signOut()        
