@@ -46,7 +46,7 @@ const StackNavigator = createStackNavigator(
     AndroidTabs: MaterialTopTabNavigator,
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Login'
   }
 );
 

@@ -22,15 +22,26 @@
       color="#993099"
       accessibility-label="Learn more about this purple button"
     />
-    <image-picker />
+    <image-picker @load="onLoadPhoto" />
     </view>
   </view>
 </template>
 
 <script>
+import { firebase } from '../firebase'
 import ImagePicker from "../components/ImagePicker";
 export default {
     components: { ImagePicker },
+    props: {
+      navigation: {
+        type: Object
+      }
+    },
+    mounted () {
+      if(!firebase.auth().currentUser) {
+        this.navigation.navigate('Login')
+      }
+    },
     data: { 
         walking: true,
         text: '',
@@ -42,6 +53,9 @@ export default {
       },
       onPressSend: function() {
         alert(this.comment)
+    },
+    onLoadPhoto(uri) {
+      console.log(uri)
     }
   }
 }
