@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     addCount() {
-      this.post.counter += 1;
+      this.post.likeCount += 1
     }
   }
 };

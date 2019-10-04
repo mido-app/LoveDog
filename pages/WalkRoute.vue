@@ -5,7 +5,7 @@
     </nb-header>
     <nb-grid>
       <nb-row>
-        <map-view class="map" :initial-region="coordinates">
+        <map-view class="map" :initial-region="coordinates" :region="region">
         </map-view>
       </nb-row>
       <nb-row>
@@ -29,26 +29,31 @@ export default {
   data: function() {
     return {
       coordinates: {
-        latitude: 35.7656561,
-        longitude: 139.2269407,
+        latitude: 12.91074,
+        longitude: 77.5996363,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
       },
+      region: {},
       location: {},
       title: "TitleA",
       description: "Desc",
     };
   },
   async created() {
-    await Location.requestPermissionsAsync();
-    this.location = await Location.getCurrentPositionAsync({});
-    console.log("Current location=" + JSON.stringify(this.location));
+    console.log("Initial location=" + JSON.stringify(this.coordinates));
   },
   methods: {
     getLocation: async function() {
       await Location.requestPermissionsAsync();
       this.location = await Location.getCurrentPositionAsync({});
       console.log("getLocation=" + JSON.stringify(this.location));
+      this.region = {
+        latitude: this.location.coords.latitude,
+        longitude: this.location.coords.longitude,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      };
     }
   },
   components: {

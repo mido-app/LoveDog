@@ -10,9 +10,8 @@
         </view>
       </scroll-view>
       </nb-row>
-      <nb-row v-if="walking" :style="{height: 35}">
+      <nb-row v-if="!walking" :style="{height: 35}">
         <image
-          v-if="!walking"
           class="inu"
           :style="{width: 35, height: 35}"
           :source="require('../assets/5673.gif')"/>
