@@ -46,12 +46,22 @@ export default {
       LoginCheck:false,
     };
   },
-  mounted() {
-    if(firebase.auth().currentUser) {
-      this.navigation.navigate('MyPage')
-    }
+  async mounted() {
+    await this.checkAuth()
+    // if(firebase.auth().currentUser) {
+    //   this.navigation.navigate('MyPage')
+    // }
   },
   methods: {
+    async checkAuth() {
+      return new Promise((resolve, reject) => {
+        auth.onAuthStateChanged(user => {
+          if (user) {
+            this.navigation.navigate('MyPage')
+          }
+        })
+      })
+    },
     async SignUpPress() {
       try {
         const result = await auth.createUserWithEmailAndPassword(this.Email, this.Password)
