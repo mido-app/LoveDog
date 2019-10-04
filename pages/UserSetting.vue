@@ -56,7 +56,6 @@ export default {
     }
 
     this.iconUrl = await storage.ref(this.user.iconPath).getDownloadURL()
-    console.log(this.iconUrl)
   },
   data: function() {
     return {
