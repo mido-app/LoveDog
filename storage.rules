@@ -4,7 +4,8 @@ service firebase.storage {
       allow read: if true;
     }
     match /userIcon/{uid}/{allPaths=**} {
-      allow read, write: if request.auth.uid == uid;
+      allow read: if true;
+      allow write: if request.auth.uid == uid;
     }
   }
 }

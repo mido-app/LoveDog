@@ -6,13 +6,12 @@
           paddingVertical: 20
       }}">
         <view>
-          <Action v-for="act in actions" :key="act.postId" :act="act"></Action>
+          <TweetSlice v-for="post in globalPost" :key="post.postId" :post="post" />
         </view>
       </scroll-view>
       </nb-row>
-      <nb-row v-if="walking" :style="{height: 35}">
+      <nb-row v-if="!walking" :style="{height: 35}">
         <image
-          v-if="walking"
           class="inu"
           :style="{width: 35, height: 35}"
           :source="require('../assets/5673.gif')"/>
@@ -20,7 +19,7 @@
       <nb-row :style="{height: 35}">
       <nb-col :style="{width: 60}">
       <nb-button small light
-        v-if="!walking"
+        v-if="walking"
         :on-press="onPressWalking"
       >
         <nb-text>散歩開始</nb-text></nb-button>
@@ -32,7 +31,9 @@
       </nb-button>
         </nb-col>
         <nb-col>
-      <text-input v-model="comment" />
+          <nb-item regular :style="{height: 32}">
+            <nb-input v-model="comment" />
+          </nb-item>
         </nb-col>
         <nb-col :style="{width: 45}">
           <nb-button small light
@@ -50,12 +51,12 @@
 </template>
 
 <script>
-import Action from "../components/Action";
+import TweetSlice from "../components/TweetSlice";
 import ImagePicker from "../components/ImagePicker";
 import { firebase, auth, firestore } from '../firebase'
 
 export default {
-    components: { Action, ImagePicker },
+    components: { TweetSlice, ImagePicker },
     props: {
       navigation: {
         type: Object
@@ -71,15 +72,15 @@ export default {
         .where("userId", "==", auth.currentUser.uid)
         .orderBy('createdAt', 'desc')
         .get()
-      let actions = []
+      let globalPost = []
       snapshot.forEach(doc => {
         const data = doc.data()
         let post = doc.data()
         post.postId = doc.id
         post.createdAt = data.createdAt.toDate()
-        actions.push(post)
+        globalPost.push(post)
       })
-      this.actions = actions
+      this.globalPost = globalPost
     },
     data: function() {
       return {
@@ -88,7 +89,7 @@ export default {
           text: '',
           comment: '',
           photoUri: '',
-          actions: []
+          globalPost: []
         }
     },
     methods: {

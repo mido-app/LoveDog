@@ -11,8 +11,7 @@
 </template>
 
 <script>
-import Vue from 'vue-native-core';
-import { firebase } from '../firebase'
+import { firebase, firestore, storage } from '../firebase'
 import TweetSlice from "../components/TweetSlice";
 
 export default {
@@ -22,72 +21,58 @@ export default {
       type: Object
     }
   },
-  mounted() {
+  async mounted() {
     if (!firebase.auth().currentUser) {
       this.navigation.navigate("Login");
     }
+
+    // 投稿を取得
+    let snapshot = await firestore
+      .collection('global-post')
+      .orderBy('updatedAt', 'desc')
+      .get()
+    let globalPost = []
+    snapshot.forEach(doc => {
+      const data = doc.data()
+      let post = doc.data()
+      post.postId = doc.id
+      post.createdAt = data.createdAt.toDate()
+      post.updatedAt = data.updatedAt.toDate()
+      globalPost.push(post)      
+    })
+
+    console.log(globalPost)
+
+    // ユーザを取得
+    let userIdList = globalPost.map(post => post.userId).filter((x, i, self) => self.indexOf(x) === i)
+    console.log(userIdList)
+
+    let userDocList = await Promise.all(
+      userIdList.map(uid => firestore.collection('user').doc(uid).get())
+    )
+
+    let userList = await Promise.all(
+      userDocList.map(async doc => {
+        let user = doc.data()
+        user.id = doc.id
+        user.iconUrl = await storage.ref(user.iconPath).getDownloadURL()  
+        return user
+      })
+    )
+    console.log(userList)
+
+    globalPost.forEach(post => {
+      const user = userList.filter(u => u.id === post.userId)[0]
+      post.userName = user.name
+      post.icon = user.iconUrl
+    })
+
+    console.log(globalPost)
+    this.globalPost = globalPost
   },
   data: function() {
     return {
-      globalPost: [
-        {
-          postId: 1,
-          userName: "ぽち",
-          icon:
-            "https://facebook.github.io/react-native/docs/assets/favicon.png",
-          body: "本文",
-          counter: 0,
-          picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
-          createdAt: "ドキュメントの登録日時"
-        },
-        {
-          postId: 2,
-          userName: "太郎",
-          icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
-          body: "本文",
-          counter: 0,
-          createdAt: "ドキュメントの登録日時"
-        },
-        {
-          postId: 3,
-          userName: "ぽち",
-          icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
-          body: "本文",
-          counter: 0,
-          picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
-          createdAt: "ドキュメントの登録日時"
-        },
-        {
-          postId: 4,
-          userName: "ぽち",
-          icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
-          body: "本文",
-          counter: 0,
-          picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
-          createdAt: "ドキュメントの登録日時"
-        },
-        {
-          postId: 5,
-          userName: "散歩ユーザー",
-          icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
-          body: "散歩しました",
-          counter: 0,
-          childPostList: [
-            {
-              postId: "5",
-              body: "散歩を開始",
-              createdAt: "投稿日時"
-            },
-            {
-              postId: "6",
-              body: "散歩を終了",
-              createdAt: "投稿日時"
-            }
-          ],
-          picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
-          createdAt: "ドキュメントの登録日時"
-        }
-      ]
+      globalPost: []
     };
   },
   props: {
