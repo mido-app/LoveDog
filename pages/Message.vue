@@ -117,6 +117,9 @@
       };
     },
     methods: {
+      onPressLike(){
+        likeCount = likeCount+1;
+      },    
       WalkRoutePress() {
         this.navigation.navigate("WalkRoute");
       }

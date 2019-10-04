@@ -20,11 +20,11 @@
       </nb-button>
     </nb-body>
     <nb-right>
-      <view v-if="post.childPostList instanceof Array">
-        <nb-button transparent>
+      <view v-if="post.childPostList instanceof Array ">
+        <nb-button transparent :onPress="onPressView">
           <nb-text>View</nb-text>
         </nb-button>
-        <nb-button transparent>
+        <nb-button transparent :onPress="onPressMap">
           <nb-icon name="navigate" active></nb-icon>
         </nb-button>
       </view>
@@ -37,9 +37,18 @@ export default {
   props: {
     post: {
       Type: Object
+    },
+    navigation: {
+      Type: Object
     }
   },
   methods: {
+    onPressView() {
+      this.$emit('view', this.post.postId)
+    },
+    onPressMap() {
+      this.$emit('map', this.post.postId)
+    },
     addCount() {
       this.post.likeCount += 1
     }
