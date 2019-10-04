@@ -17,7 +17,7 @@
         <nb-text>View</nb-text>
       </nb-button>
       <view v-if="post.childPostList instanceof Array">
-        <nb-button :on-press="handleBtnPress" transparent>
+        <nb-button transparent>
           <nb-icon name="navigate" active></nb-icon>
         </nb-button>
       </view>
