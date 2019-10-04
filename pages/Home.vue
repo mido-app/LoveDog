@@ -5,6 +5,7 @@
     <button title="MyPage" @press="() => navigate('MyPage')" />
     <button title="UserSetting" @press="() => navigate('UserSetting')" />
     <button title="WorldActivity" @press="() => navigate('WorldActivity')" />
+    <button title="WalkRoute" @press="() => navigate('WalkRoute')" />
   </view>  
 </template>
 

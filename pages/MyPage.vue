@@ -31,41 +31,51 @@
 <script>
 import Action from "../components/Action";
 import ImagePicker from "../components/ImagePicker";
+import { firebase } from '../firebase'
+
 export default {
     components: { Action, ImagePicker },
-    props: { 
-        walking: true,
-        text: '',
-        comment: '',
-        photoUri: ''
+    props: {
+      navigation: {
+        type: Object
+      }
+    },
+    mounted () {
+      if(!firebase.auth().currentUser) {
+        this.navigation.navigate('Login')
+      }
     },
     data: function() {
-          return {
-            actions: [
-              {
-                postId: 1,
-                body: "a Sunny Day",
-                icon: "",
-                likeCount: 5,
-                createdAt: "ドキュメントの登録日時"
-              },
-              {
-                postId: 2,
-                body: "a Sunny Day",
-                icon: "",
-                likeCount: 10,
-                createdAt: "ドキュメントの登録日時"
-              },
-              {
-                postId: 3,
-                body: "a Sunny Day",
-                icon: "",
-                likeCount: 100,
-                createdAt: "ドキュメントの登録日時"
-              },
-            ]
-          };
-        },
+      return {
+          walking: true,
+          text: '',
+          comment: '',
+          photoUri: '',
+          actions: [
+            {
+              postId: 1,
+              body: "a Sunny Day",
+              icon: "",
+              likeCount: 5,
+              createdAt: "ドキュメントの登録日時"
+            },
+            {
+              postId: 2,
+              body: "a Sunny Day",
+              icon: "",
+              likeCount: 10,
+              createdAt: "ドキュメントの登録日時"
+            },
+            {
+              postId: 3,
+              body: "a Sunny Day",
+              icon: "",
+              likeCount: 100,
+              createdAt: "ドキュメントの登録日時"
+            },
+          ]
+        }
+    },
     methods: {
       onPressWalking: function() {
         this.walking = !this.walking
