@@ -1,17 +1,24 @@
 <template>
   <view>
     <view>
-      <text>WorldActivity</text>
       <button title="MyPage" @press="onMyPage" />
     </view>
-    <view class="container">
+    <scroll-view :content-container-style="{contentContainer: {
+        paddingVertical: 20
+    }}">
+    <view>
       <TweetSlice v-for="post in globalPost" :key="post.postId" :post="post" />
     </view>
+    </scroll-view>
   </view>
 </template>
 
 <script>
+import Vue from 'vue-native-core';
+import { VueNativeBase } from 'native-base';
 import TweetSlice from "./TweetSlice";
+
+Vue.use(VueNativeBase);
 
 export default {
   components: { TweetSlice },
@@ -21,33 +28,37 @@ export default {
         {
           postId: 1,
           userName: "ぽち",
-          icon:
-            "https://facebook.github.io/react-native/docs/assets/favicon.png",
+          icon: "https://facebook.github.io/react-native/docs/assets/favicon.png",
           body: "本文",
+          counter: 0,
+          picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
           createdAt: "ドキュメントの登録日時"
         },
         {
           postId: 2,
           userName: "ぽち",
-          icon:
-            "https://facebook.github.io/react-native/docs/assets/favicon.png",
+          icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
           body: "本文",
+          counter: 0,
+          picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
           createdAt: "ドキュメントの登録日時"
         },
         {
           postId: 3,
           userName: "ぽち",
-          icon:
-            "https://facebook.github.io/react-native/docs/assets/favicon.png",
+          icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
           body: "本文",
+          counter: 0,
+          picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
           createdAt: "ドキュメントの登録日時"
         },
         {
           postId: 4,
           userName: "ぽち",
-          icon:
-            "https://facebook.github.io/react-native/docs/assets/favicon.png",
+          icon: "http://arch.casio.jp/image/dc/images/fh20_gallery_pic04_b.jpg",
           body: "本文",
+          counter: 0,
+          picture: "http://www.cor-art.com/best/tenkei/down/SA001.JPG",
           createdAt: "ドキュメントの登録日時"
         }
       ]
