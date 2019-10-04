@@ -49,12 +49,6 @@ export default {
       await Location.requestPermissionsAsync();
       this.location = await Location.getCurrentPositionAsync({});
       console.log("getLocation=" + JSON.stringify(this.location));
-      // this.coordinates = {
-      //   latitude: this.location.latitude,
-      //   longitude: this.location.longitude,
-      //   latitudeDelta: this.location.latitudeDelta,
-      //   longitudeDelta: this.location.longitudeDelta,
-      // };
     }
   },
   components: {
