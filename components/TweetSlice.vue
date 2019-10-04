@@ -12,9 +12,16 @@
         <nb-text>{{post.counter}} Likes</nb-text>
       </nb-button>
     </nb-body>
-    <nb-button transparent>
-      <nb-text>View</nb-text>
-    </nb-button>
+    <nb-right>
+      <nb-button transparent>
+        <nb-text>View</nb-text>
+      </nb-button>
+      <view v-if="post.childPostList instanceof Array">
+        <nb-button :on-press="handleBtnPress" transparent>
+          <nb-icon name="navigate" active></nb-icon>
+        </nb-button>
+      </view>
+    </nb-right>
   </nb-list-item>
 </template>
 
