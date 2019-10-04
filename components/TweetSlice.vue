@@ -9,8 +9,10 @@
     <nb-body>
       <nb-text>{{post.userName}}</nb-text>
       <nb-text note :style="{width: 150}">{{post.body}}</nb-text>
-      <view v-if="post.picture != null">
-        <image :style="{width: 150, height: 90}" :source="{uri: post.picture}" />
+      <view v-if="post.images != null">
+        <view v-for="imageUri in post.images" :key="imageUri">
+          <image :style="{width: 150, height: 90}" :source="{uri: imageUri}" />
+        </view>
       </view>
       <nb-button :on-press="addCount" transparent>
         <nb-icon name="thumbs-up" active></nb-icon>
@@ -18,10 +20,10 @@
       </nb-button>
     </nb-body>
     <nb-right>
-      <nb-button transparent>
-        <nb-text>View</nb-text>
-      </nb-button>
       <view v-if="post.childPostList instanceof Array">
+        <nb-button transparent>
+          <nb-text>View</nb-text>
+        </nb-button>
         <nb-button transparent>
           <nb-icon name="navigate" active></nb-icon>
         </nb-button>
