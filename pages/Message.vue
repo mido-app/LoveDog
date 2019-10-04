@@ -79,6 +79,12 @@
       ],
 
       };
+    },
+    methods: {
+      onPressLike(){
+        likeCount = likeCount+1;
+      }
+    
     }
   };
 </script>

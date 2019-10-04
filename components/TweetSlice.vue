@@ -13,10 +13,10 @@
       </nb-button>
     </nb-body>
     <nb-right>
-      <nb-button transparent>
+      <nb-button transparent :onPress="onPressView">
         <nb-text>View</nb-text>
       </nb-button>
-      <view v-if="post.childPostList instanceof Array">
+      <view v-if="post.childPostList instanceof Array ">
         <nb-button transparent>
           <nb-icon name="navigate" active></nb-icon>
         </nb-button>
@@ -30,6 +30,14 @@ export default {
   props: {
     post: {
       Type: Object
+    },
+    navigation: {
+      Type: Object
+    }
+  },
+  methods: {
+    onPressView() {
+      this.$emit('view', this.post.postId)
     }
   }
 };
