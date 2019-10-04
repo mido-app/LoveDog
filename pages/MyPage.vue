@@ -1,40 +1,63 @@
 <template>
-  <view>
-    <view class="timeline">
-      <Action v-for="act in actions" :key="act.postId" :act="act"></Action>
-    </view>
-    <view class="action">
-    <button
-      v-if="walking"
-      :on-press="onPressWalking"
-      title="散歩開始"
-      color="#841584"
-    />
-    <button
-      v-else
-      :on-press="onPressWalking"
-      title="散歩終了"
-      color="#841584"
-    />
-    <text-input v-model="comment" />
-    <button
-      :on-press="onPressSend"
-      title="投稿"
-      color="#993099"
-      accessibility-label="Learn more about this purple button"
-    />
-    <image-picker @load="onLoadPhoto" />
-    </view>
-  </view>
+  <nb-container>
+    <nb-grid>
+      <nb-row>
+      <scroll-view :content-container-style="{contentContainer: {
+          paddingVertical: 20
+      }}">
+        <view>
+          <TweetSlice v-for="post in globalPost" :key="post.postId" :post="post" />
+        </view>
+      </scroll-view>
+      </nb-row>
+      <nb-row v-if="walking" :style="{height: 35}">
+        <image
+          v-if="!walking"
+          class="inu"
+          :style="{width: 35, height: 35}"
+          :source="require('../assets/5673.gif')"/>
+      </nb-row>
+      <nb-row :style="{height: 35}">
+      <nb-col :style="{width: 60}">
+      <nb-button small light
+        v-if="walking"
+        :on-press="onPressWalking"
+      >
+        <nb-text>散歩開始</nb-text></nb-button>
+      <nb-button small primary
+        v-else
+        :on-press="onPressWalking"
+      >
+        <nb-text>散歩終了</nb-text>
+      </nb-button>
+        </nb-col>
+        <nb-col>
+          <nb-item regular :style="{height: 32}">
+            <nb-input v-model="comment" />
+          </nb-item>
+        </nb-col>
+        <nb-col :style="{width: 45}">
+          <nb-button small light
+            :on-press="onPressSend"
+          >
+            <nb-text>投稿</nb-text>
+          </nb-button>
+        </nb-col>
+        <nb-col :style="{width: 50}">
+          <image-picker @load="onLoadPhoto" />
+        </nb-col>
+      </nb-row>
+      </nb-grid>
+  </nb-container>
 </template>
 
 <script>
-import Action from "../components/Action";
+import TweetSlice from "../components/TweetSlice";
 import ImagePicker from "../components/ImagePicker";
 import { firebase, auth, firestore } from '../firebase'
 
 export default {
-    components: { Action, ImagePicker },
+    components: { TweetSlice, ImagePicker },
     props: {
       navigation: {
         type: Object
@@ -50,15 +73,15 @@ export default {
         .where("userId", "==", auth.currentUser.uid)
         .orderBy('createdAt', 'desc')
         .get()
-      let actions = []
+      let globalPost = []
       snapshot.forEach(doc => {
         const data = doc.data()
         let post = doc.data()
         post.postId = doc.id
         post.createdAt = data.createdAt.toDate()
-        actions.push(post)
+        globalPost.push(post)
       })
-      this.actions = actions
+      this.globalPost = globalPost
     },
     data: function() {
       return {
@@ -67,7 +90,7 @@ export default {
           text: '',
           comment: '',
           photoUri: '',
-          actions: []
+          globalPost: []
         }
     },
     methods: {
@@ -173,20 +196,4 @@ export default {
 </script>
 
 <style>
-.container {
-  background-color: white;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-}
-.timeline {
-  background-color: white;
-}
-.action {
-  background-color: lightslategray;
-  color: aquamarine;
-}
-.text-color-primary {
-  color: blue;
-}
 </style>

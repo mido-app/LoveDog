@@ -15,6 +15,7 @@ import Login from './pages/Login'
 import MyPage from './pages/MyPage'
 import WorldActivity from './pages/WorldActivity'
 import UserSetting from './pages/UserSetting'
+import Message from './pages/Message'
 import WalkRoute from './pages/WalkRoute'
 
 import Vue from "vue-native-core";
@@ -42,6 +43,7 @@ const StackNavigator = createStackNavigator(
     Home: Home,
     Login: Login,
     WalkRoute: WalkRoute,
+    Message: Message,
     IOSTabs: BottomTabNavigator,
     AndroidTabs: MaterialTopTabNavigator,
   },
