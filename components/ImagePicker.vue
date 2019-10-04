@@ -3,17 +3,30 @@
     <button
       :on-press="pickImage"
       title="Cam"
-    >
+    />
   </view>
 </template>
 
 <script>
+import { Permissions } from "expo";
 import * as ImagePicker from 'expo-image-picker';
 export default {
+    props: {
+      result: null,
+    },
     methods: {
-          pickImage: function() {
-            ImagePicker.launchCameraAsync();
-          }
+      async pickImage() {
+        try {
+          this.result = await ImagePicker.launchCameraAsync();
+          console.log(this.result)          
+        } catch (err) {
+          console.error(err)
+        }
+
+        if(!this.result.cancelled) {
+          this.$emit('load', this.result.uri)
+        }
+      }
  }
 }
 </script>
